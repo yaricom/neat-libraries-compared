@@ -107,9 +107,9 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=F
 
     solution_found = best_genome_fitness > config.fitness_threshold
     if solution_found:
-        print("Trial: %d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, p.generation, best_genome_fitness, complexity, seed))
+        print("Trial: %2d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, p.generation, best_genome_fitness, complexity, seed))
     else:
-        print("Trial: %d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, best_genome_fitness, complexity, seed))
+        print("Trial: %2d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, best_genome_fitness, complexity, seed))
 
     # Visualize the experiment results
     if save_results:
@@ -153,4 +153,4 @@ if __name__ == '__main__':
                         eval_function=run_experiment, 
                         config=config_path, 
                         out_dir=out_dir, 
-                        save_results=True)
+                        save_results=False)

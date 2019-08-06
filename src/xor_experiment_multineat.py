@@ -162,13 +162,13 @@ def run_experiment(params, trial_id, n_generations, out_dir=None, view_results=F
         complexity = best.NumNeurons() + best.NumLinks()
         solved = best.GetFitness() > 15.5 # Changed to correspond limit used with other tested libraries
         if solved:
-            print("Trial: %d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, generations, best.GetFitness(), complexity, seed))
+            print("Trial: %2d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, generations, best.GetFitness(), complexity, seed))
             break
         # move to the next epoch
         pop.Epoch()
             
     if not solved:
-        print("Trial: %d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, best.GetFitness(), complexity, seed))
+        print("Trial: %2d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, best.GetFitness(), complexity, seed))
 
     return solved, generations, complexity
 
