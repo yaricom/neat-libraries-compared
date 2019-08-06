@@ -18,10 +18,11 @@ import neat
 import utils.visualize as visualize
 import utils
 
-import xor
+from experiment import evaluate_experiment
 
-# The current working directory
-local_dir = os.path.dirname(__file__)
+# The XOR inputs and expected corresponding outputs for fitness evaluation
+xor_inputs  = [(0.0, 0.0), (0.0, 1.0), (1.0, 0.0), (1.0, 1.0)]
+xor_outputs = [   (0.0,),     (1.0,),     (1.0,),     (0.0,)]
 
 def eval_fitness(net):
     """
@@ -34,7 +35,7 @@ def eval_fitness(net):
         fit organism. Maximal score: 16.0
     """
     error_sum = 0.0
-    for xi, xo in zip(xor.xor_inputs, xor.xor_outputs):
+    for xi, xo in zip(xor_inputs, xor_outputs):
         output = net.activate(xi)
         error_sum += abs(output[0] - xo[0])
     # Calculate amplified fitness
@@ -62,7 +63,7 @@ def eval_genomes(genomes, config):
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         genome.fitness = eval_fitness(net)
 
-def run_experiment(config_file, trial_id, n_generations, out_dir, view=False, save_results=True):
+def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=False, save_results=True):
     """
     The function to run XOR experiment against hyper-parameters 
     defined in the provided configuration file.
@@ -74,7 +75,7 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view=False, sa
         trial_id:       the id of current trial run
         n_generations:  the number of evolutionary generations
         out_dir:        the directory to store experiment outputs
-        view:           the flag to control whether to view result visualizations
+        view_results:   the flag to control whether to view result visualizations
         save_results:   the flag to control whether to save resulting stats into files
     """
     # set random seed
@@ -90,7 +91,7 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view=False, sa
     p = neat.Population(config)
 
     # Add a stdout reporter to show progress in the terminal.
-    p.add_reporter(neat.StdOutReporter(True))
+    #p.add_reporter(neat.StdOutReporter(True))
     stats = neat.StatisticsReporter()
     p.add_reporter(stats)
 
@@ -101,23 +102,23 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view=False, sa
     net = neat.nn.FeedForwardNetwork.create(best_genome, config)
     best_genome_fitness = eval_fitness(net)
 
-    solution_found = best_genome_fitness > config.fitness_threshold
-    print("\n\nXOR Trial: %d" % trial_id)
-    if solution_found:
-        print("SUCCESS: The XOR problem solver found!!!")
-    else:
-        print("FAILURE: Failed to find XOR problem solver!!!")
+    # Find best genome complexity
+    complexity = len(best_genome.connections) + len(best_genome.nodes) + 2 # two input nodes
 
-    print("Random seed: ", seed)
+    solution_found = best_genome_fitness > config.fitness_threshold
+    if solution_found:
+        print("Trial: %d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, p.generation, best_genome_fitness, complexity, seed))
+    else:
+        print("Trial: %d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, best_genome_fitness, complexity, seed))
 
     # Visualize the experiment results
     if save_results:
         node_names = {-1:'A', -2: 'B', 0:'A XOR B'}
-        visualize.draw_net(config, best_genome, view=view, node_names=node_names, directory=out_dir)
-        visualize.plot_stats(stats, ylog=False, view=view, filename=os.path.join(out_dir, 'avg_fitness.svg'))
-        visualize.plot_species(stats, view=view, filename=os.path.join(out_dir, 'speciation.svg'))
+        visualize.draw_net(config, best_genome, view=view_results, node_names=node_names, directory=out_dir)
+        visualize.plot_stats(stats, ylog=False, view=view_results, filename=os.path.join(out_dir, 'avg_fitness.svg'))
+        visualize.plot_species(stats, view=view_results, filename=os.path.join(out_dir, 'speciation.svg'))
 
-    return solution_found
+    return solution_found, p.generation, complexity
 
 
 if __name__ == '__main__':
@@ -128,6 +129,9 @@ if __name__ == '__main__':
     parser.add_argument('-t', '--trials', type=int, default=10,
                         help="The number of experiment trials.")
     args = parser.parse_args()
+
+    # The current working directory
+    local_dir = os.path.dirname(__file__)
 
     # Determine path to configuration file. This path manipulation is
     # here so that the script will run successfully regardless of the
@@ -141,21 +145,12 @@ if __name__ == '__main__':
     utils.clear_output(out_dir=out_dir)
 
     # Run the experiment for a number of trials
-    start_time = time.time()
-    results = np.zeros((args.trials,), dtype=int)
-    for i in range(args.trials):
-        trial_out_dir = os.path.join(out_dir, "%d" % i)
-        success = run_experiment(config_path, 
-                                    trial_id=i, 
-                                    n_generations=args.generations,
-                                    out_dir=trial_out_dir)
-        if success:
-            results[i] = 1
-
-    success_run = np.count_nonzero(results)
-    success_rate = float(success_run) / float(args.trials)
-    elapsed_time = time.time() - start_time
-
-    print("\n\n**************************")
-    print("XOR -> success runs: %d from: %d\nsuccess rate: %f" % (success_run, args.trials, success_rate))
-    print("Experiment's elapsed time: %.3f sec" % (elapsed_time))
+    print("\n**************************")
+    print("  NEAT-Python Library")
+    print("  XOR Experiment")
+    print("**************************\n")
+    evaluate_experiment(args, 
+                        eval_function=run_experiment, 
+                        config=config_path, 
+                        out_dir=out_dir, 
+                        save_results=True)
