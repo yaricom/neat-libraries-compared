@@ -118,7 +118,7 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=F
         visualize.plot_stats(stats, ylog=False, view=view_results, filename=os.path.join(out_dir, 'avg_fitness.svg'))
         visualize.plot_species(stats, view=view_results, filename=os.path.join(out_dir, 'speciation.svg'))
 
-    return solution_found, p.generation, complexity
+    return solution_found, p.generation, complexity, best_genome_fitness
 
 
 if __name__ == '__main__':
@@ -149,8 +149,10 @@ if __name__ == '__main__':
     print("  NEAT-Python Library")
     print("  XOR Experiment")
     print("**************************\n")
-    evaluate_experiment(args, 
+    results = evaluate_experiment(args, 
                         eval_function=run_experiment, 
                         config=config_path, 
                         out_dir=out_dir, 
                         save_results=False)
+    
+    results.print_statistics()

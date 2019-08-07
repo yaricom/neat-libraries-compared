@@ -163,7 +163,8 @@ def run_experiment(params, trial_id, n_generations, out_dir=None, view_results=F
         complexity = best.NumNeurons() + best.NumLinks()
         solved = best_fitness > 15.5 # Changed to correspond limit used with other tested libraries
         if solved:
-            print("Trial: %2d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, generations, best_fitness, complexity, seed))
+            max_fitness = best_fitness
+            print("Trial: %2d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, generations, max_fitness, complexity, seed))
             break
         # check if best fitness in this generation is better than current maximum
         max_fitness = max(best_fitness, max_fitness)
@@ -174,7 +175,7 @@ def run_experiment(params, trial_id, n_generations, out_dir=None, view_results=F
     if not solved:
         print("Trial: %2d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, max_fitness, complexity, seed))
 
-    return solved, generations, complexity
+    return solved, generations, complexity, max_fitness
 
 if __name__ == '__main__':
     # read command line parameters
@@ -202,7 +203,9 @@ if __name__ == '__main__':
     print("  MultiNEAT Library")
     print("  XOR Experiment")
     print("**************************\n")
-    evaluate_experiment(args, 
+    results = evaluate_experiment(args, 
                         eval_function=run_experiment, 
                         config=params, 
                         out_dir=out_dir)
+                        
+    results.print_statistics()
