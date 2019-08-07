@@ -151,7 +151,7 @@ def run_experiment(params, trial_id, n_generations, out_dir=None, view_results=F
 
     generations = 0
     solved = False
-    best = None
+    max_fitness = 0
     complexity = 0
     for generation in range(n_generations):
         genome_list = NEAT.GetGenomeList(pop)
@@ -159,16 +159,20 @@ def run_experiment(params, trial_id, n_generations, out_dir=None, view_results=F
         NEAT.ZipFitness(genome_list, fitness_list)
         generations = generation
         best = max(genome_list, key=get_fitness)
+        best_fitness = best.GetFitness()
         complexity = best.NumNeurons() + best.NumLinks()
-        solved = best.GetFitness() > 15.5 # Changed to correspond limit used with other tested libraries
+        solved = best_fitness > 15.5 # Changed to correspond limit used with other tested libraries
         if solved:
-            print("Trial: %2d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, generations, best.GetFitness(), complexity, seed))
+            print("Trial: %2d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, generations, best_fitness, complexity, seed))
             break
+        # check if best fitness in this generation is better than current maximum
+        max_fitness = max(best_fitness, max_fitness)
+
         # move to the next epoch
         pop.Epoch()
             
     if not solved:
-        print("Trial: %2d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, best.GetFitness(), complexity, seed))
+        print("Trial: %2d\tFAILED\t\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, max_fitness, complexity, seed))
 
     return solved, generations, complexity
 
