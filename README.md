@@ -48,14 +48,29 @@ $ conda install python-graphviz
 
 # The Performance Metrics
 
-In order to be able to find the most performant library we need to define the performance evaluation metrics that will be used to compare different libraries. 
+To find the most performant library, we need to determine the performance evaluation metrics that will be used to compare different libraries. 
 
-In this experiment the following metrics will be used:
+In this experiment, the following metrics are used:
  - success rate (the number of successful trials among total trials)
- - the min/max range of evolution generations in which successful solver found 
- - the average complexity of found solutions 
- - the total complexity of best individuals in evaluated populations 
- - the elapsed time for specified number of experiment trials
+ - the average duration of one epoch of evolution among all trials/generations
+ - the average number of generations per trial
+ - average complexity of found solutions (the complexity of winner genomes)
+ - the average fitness of found solutions
+
+ To aggregate all the abovementioned metrics into a single unified score, we introduce the complex metric named *efficiency score*. This metric allows comparing the efficiency of each library in terms of:
+ - how efficient it in finding the solution of the given problem (success rate)
+ - how fast it was able to find a solution (average number of generations per trial)
+ - the efficiency of the library algorithm in terms of execution speed (average epoch duration)
+ - the efficiency of found solutions in terms of its topological complexity (average winner complexity)
+ - the efficiency of found solutions in terms of its ability to meet the goal (average fitness score)
+
+The efficiency score metric can be estimated as follows:
+
+```
+score = success_rate * avg_fitness_score / log(avg_epoch_duration * avg_winner_complexity * avg_generations_trial)
+```
+
+We use the natural logarithm in the denominator to clamp down the denominator value to a range consistent with the value of fitness score in the numerator. The success rate, which is in range (0,1], effectively adjust the value of the efficiency score to reflect algorithm efficiency in finding a solution.
 
 # The XOR Problem Benchmark
 The XOR problem solver is a classic computer science experiment in the field of reinforcement learning, which can not be solved without introducing non-linear execution to the solver algorithm. 
@@ -91,7 +106,7 @@ We decided to go with slightly reduced fitness threshold value to adjust for the
 
 ### The NEAT-Python Library Results
 
-The [NEAT-Python][4] library is a pure Python implementation of the NEAT algorithm. In XOR experiment it demonstrated the worst performance as in terms of success rate as in terms of execution time.
+The [NEAT-Python][4] library is a pure Python implementation of the NEAT algorithm. In XOR experiment, it demonstrates the worst performance with the lowest success rate and the longest execution time.
 
 The XOR experiment with NEAT-Python library can be started with following commands:
 
@@ -103,15 +118,29 @@ $ python xor_experiment_neat.py -t 100
 The output of the command above is similar to the following:
 
 ```txt
-XOR solutions found within generations min: 43, max: 94
-Success runs 23 from 100, success rate: 0.230000
-Average winners complexity: 12.522, average complexity: 10.180
-Experiment's elapsed time: 432.697 sec
+Solved 19 trials from 100, success rate: 0.190000
+Average
+	trial duration:		4545.045724 ms
+	epoch duration:		47.644999 ms
+	generations/trial:	92.5
+
+Average among winners
+	Complexity:		14.000000
+	Fitness:		15.789716
+	generations/trial:	60.4
+
+Average for all organisms evaluated during experiment
+	Complexity:		10.960000
+	Fitness:		10.709556
+
+Efficiency score:		0.271994
 ```
+
+The output above demonstrates that NEAT-Python library lagged behind other compared libraries in terms of execution speed and general performance. It can find successful solvers of the XOR problem only in about 20% of trials, which is very low compared to the other studied libraries.
 
 ### The MultiNEAT Library Results
 
-The [MultiNEAT][5] library is written in C++ but provides coresponding Python bindings. In XOR experiment it demonstrates excellent performance.
+The [MultiNEAT][5] library is written in C++ but provides corresponding Python bindings. In XOR experiment it demonstrates excellent performance, especially in terms of ability to find a problem solution. Most of the runs, the success rate is 1.0, which means that a solution was found in all experiment trials.
 
 The XOR experiment with MultiNEAT library can be executed as following:
 
@@ -122,19 +151,98 @@ $ python xor_experiment_multineat.py -t 100
 ```
 The command above will be produce output similar to the followoing:
 ```txt
-XOR solutions found within generations min: 8, max: 91
-Success runs 99 from 100, success rate: 0.990000
-Average winners complexity: 16.818, average complexity: 16.770
-Experiment's elapsed time: 37.223 sec
+Solved 100 trials from 100, success rate: 1.000000
+Average
+	trial duration:		378.530622 ms
+	epoch duration:		10.960883 ms
+	generations/trial:	35.0
+
+Average among winners
+	Complexity:		18.540000
+	Fitness:		15.774268
+	generations/trial:	35.0
+
+Average for all organisms evaluated during experiment
+	Complexity:		18.540000
+	Fitness:		15.774268
+
+Efficiency score:		1.778749
 ```
 
+The MultiNEAT library demonstrates exceptional performance in the number of successful XOR problem solvers among all experiment trials. It has a success rate close to 100% and its execution speed almost for times better than of NEAT-Python library. All this combined gives it a much higher efficiency score in finding successful XOR solvers.
+
+### The GO-NEAT Library Results
+
+The [GO-NEAT][6] library is written in GO programming language and doesn't provide Python bindings. In XOR experiment, it demonstrates outstanding performance in terms of execution speed but trails the MultiNEAT library in terms of success rate.
+
+For the instruction of how to install and use a library, please refer to the [goNEAT][6] GitHub repository.
+
+After GO language environment is ready and the library is installed, you can run XOR experiment with the following command:
+
+```bash
+cd $GOPATH/src/github.com/yaricom/goNEAT
+go run executor.go -out ./out/xor -context ./data/xor.neat -genome ./data/xorstartgenes -experiment XOR
+```
+
+The command will produce the output similar to the following:
+
+```text
+Solved 93 trials from 100, success rate: 0.930000
+Average
+	Trial duration:		251.067745ms
+	Epoch duration:		1.790507ms
+	Generations/trial:	55.2
+
+Champion found in 18 trial run
+	Winner Nodes:		7
+	Winner Genes:		16
+	Winner Evals:		10150
+
+	Diversity:		47
+	Complexity:		23
+	Age:			14
+	Fitness:		16.000000
+
+Average among winners
+	Winner Nodes:		7.0
+	Winner Genes:		13.9
+	Winner Evals:		10282.8
+	Generations/trial:	51.9
+
+	Diversity:		40.096774
+	Complexity:		20.978495
+	Age:			25.397849
+	Fitness:		15.842292
+
+Averages for all organisms evaluated during experiment
+	Diversity:		23.227037
+	Complexity:		14.279039
+	Age:			14.253140
+	Fitness:		7.974019
+
+Efficiency score:		1.929031
+
+```
+
+The output produced by GO-NEAT library put it in the first place among the studied libraries by solution search efficiency score. This result is achieved due to the fastest execution speed, which almost five times higher than of MultiNEAT, and the best average fitness score of the found solutions.
+
+## The XOR Problem Results
+
+Bellow we provide results of evaluation of the different NEAT lbraries in task of finding successful XOR solvers. The libraries is ordered in descending order based on the efficiency score value. Thus, the top row is the most efficient library and the bottom row is the least efficient one.
+
+| Library | Efficiency Score | Success Rate | Avg Solution Fitness | Avg Epoch Duration | Avg Solution Complexity | Avg Generations per Trial |
+| ------- | ---------------- | ------------ | -------------------- | ------------------ | ----------------------- | --------------------- |
+| GO-NEAT | 1.93             | 0.93         | 15.84                | 1.79               | 20.98                   | 55.2                  |
+| MultiNEAT | 1.78           | 1.0          | 15.77                | 10.96              | 18.54                   | 35.0                  |
+| NEAT-Python | 0.27         | 0.19         | 15.79                | 47.64              | 14.0                    | 92.5                  |
 
 # Credits
-This source code maintained and managed by [Iaroslav Omelianenko][3]
+The source code is maintained and managed by [Iaroslav Omelianenko][3]
 
 [1]:http://www.cs.ucf.edu/~kstanley/neat.html
 [2]:http://eplex.cs.ucf.edu/neat_software/
 [3]:https://io42.space
 [4]:https://github.com/CodeReclaimers/neat-python
 [5]:https://github.com/peter-ch/MultiNEAT
+[6]:https://github.com/yaricom/goNEAT
 
