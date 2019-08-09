@@ -48,9 +48,9 @@ $ conda install python-graphviz
 
 # The Performance Metrics
 
-To find the most performant library, we need to determine the performance evaluation metrics that will be used to compare different libraries. 
+To find the most performant library, we need to determine the performance evaluation metrics that will be used to compare the efficiency of different libraries when searching for solvers of particular CS benchmark problems.
 
-In this experiment, the following metrics are used:
+In our experiments, the following metrics are used:
  - success rate (the number of successful trials among total trials)
  - the average duration of one epoch of evolution among all trials/generations
  - the average number of generations per trial
@@ -62,7 +62,7 @@ In this experiment, the following metrics are used:
  - how fast it was able to find a solution (average number of generations per trial)
  - the efficiency of the library algorithm in terms of execution speed (average epoch duration)
  - the efficiency of found solutions in terms of its topological complexity (average winner complexity)
- - the efficiency of found solutions in terms of its ability to meet the goal (average fitness score)
+ - the efficiency of found solutions in terms of its ability to meet the goal (average fitness score among winners)
 
 The efficiency score metric can be estimated as follows:
 
@@ -86,10 +86,7 @@ The XOR problem search space can be defined as following:
 | 0       | 1      | 1      |
 | 0       | 0      | 0      |
 
-The evaluation is done in 100 trials over 100 generations. 
-The fitness threshold for successful solver is 15.5 and it is based on the fitness function used in the experiment. 
-
-The maximal possible fitness score is 16.0 in accordance with the following fitness function implementation:
+The evaluation is done in 100 trials over 100 generations. The fitness threshold for the successful solver is 15.5, and it is slightly less than the maximal fitness score that can be produced by the fitness function implementation used in the experiment. The maximal possible fitness value is 16.0, as given by the following  fitness function implementation:
 
 ```Python
 xor_inputs  = [(0.0, 0.0), (0.0, 1.0), (1.0, 0.0), (1.0, 1.0)]
@@ -102,7 +99,7 @@ for xi, xo in zip(xor_inputs, xor_outputs):
 # Calculate amplified fitness
 fitness = (4 - error_sum) ** 2
 ```
-We decided to go with slightly reduced fitness threshold value to adjust for the floating point arithmetics used in the algorithm.
+We decided to use a slightly reduced value of the fitness threshold to adjust for the floating-point arithmetics used in the algorithm.
 
 ### The NEAT-Python Library Results
 
@@ -149,7 +146,7 @@ $ conda activate neat
 $ cd src
 $ python xor_experiment_multineat.py -t 100 
 ```
-The command above will be produce output similar to the followoing:
+The command above will be produce output similar to the following:
 ```txt
 Solved 100 trials from 100, success rate: 1.000000
 Average
@@ -236,11 +233,11 @@ Further, we present the results of the evaluation of the different NEAT librarie
 | MultiNEAT Python | 1.78 | 1.0 | 15.77 | 10.96 | 18.54 | 35.0 | C++, Python |
 | NEAT-Python | 0.27 | 0.19 | 15.79 | 47.64 | 14.0 | 92.5 | Python |
 
-In the results table, the libraries are ordered in descending order based on the efficiency score value. Thus, at the top row placed the most efficient library, and the bottom row is the least efficient one.
+In the results table, the libraries are ordered in descending order based on their efficiency score value. Thus, at the top row placed the most efficient library, and at the bottom row is the least efficient one.
 
 ### The XOR Problem Conclusion
 
-The NEAT-Python library obtained the lowest efficiency score, but the solutions that it was able to produce is the less complex ones. The goNEAT and MultiNEAT libraries are on par by found solutions complexity and success rate, but the former is much faster in terms of execution speed. 
+The NEAT-Python library get the lowest efficiency score, but the solutions it was able to produce are the less complex ones. The goNEAT and MultiNEAT libraries are on par in terms of complexity and success rate of found solutions, but the former is much faster in terms of execution speed (almost 5x).
 
 # Credits
 The source code is maintained and managed by [Iaroslav Omelianenko][3]
