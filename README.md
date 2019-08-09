@@ -230,11 +230,11 @@ The output produced by goNEAT library put it in the first place among the studie
 
 Further, we present the results of the evaluation of the different NEAT libraries in the task of finding successful XOR solvers.
 
-| Library | Efficiency Score | Success Rate | Avg Solution Fitness | Avg Epoch Duration | Avg Solution Complexity | Avg Generations per Trial |
-| ------- |:----------------:|:------------:|:--------------------:|:------------------:|:-----------------------:|:---------------------:|
-| goNEAT | 1.93             | 0.93         | 15.84                | 1.79               | 20.98                   | 55.2                  |
-| MultiNEAT Python | 1.78    | 1.0          | 15.77                | 10.96              | 18.54                   | 35.0                  |
-| NEAT-Python | 0.27         | 0.19         | 15.79                | 47.64              | 14.0                    | 92.5                  |
+| Library | Efficiency Score | Success Rate | Avg Solution Fitness | Avg Epoch Duration | Avg Solution Complexity | Avg Generations per Trial | Platform |
+| --- |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| goNEAT | 1.93 | 0.93 | 15.84 | 1.79 | 20.98 | 55.2 | GO |
+| MultiNEAT Python | 1.78 | 1.0 | 15.77 | 10.96 | 18.54 | 35.0 | C++, Python |
+| NEAT-Python | 0.27 | 0.19 | 15.79 | 47.64 | 14.0 | 92.5 | Python |
 
 In the results table, the libraries are ordered in descending order based on the efficiency score value. Thus, at the top row placed the most efficient library, and the bottom row is the least efficient one.
 
