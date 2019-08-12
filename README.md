@@ -54,7 +54,7 @@ In our experiments, the following metrics are used:
  - success rate (the number of successful trials among total trials)
  - the average duration of one epoch of evolution among all trials/generations
  - the average number of generations per trial
- - average complexity of found solutions (the complexity of winner genomes)
+ - average complexity of found solutions (the complexity of winner genomes - sum of nodal and link genomes)
  - the average fitness of found solutions
 
  To aggregate all the abovementioned metrics into a single unified score, we introduce the complex metric named *efficiency score*. This metric allows comparing the efficiency of each library in terms of:
@@ -86,7 +86,7 @@ The XOR problem search space can be defined as following:
 | 0       | 1      | 1      |
 | 0       | 0      | 0      |
 
-The evaluation is done in 100 trials over 100 generations. The fitness threshold for the successful solver is 15.5, and it is slightly less than the maximal fitness score that can be produced by the fitness function implementation used in the experiment. The maximal possible fitness value is 16.0, as given by the following  fitness function implementation:
+The evaluation is done in 100 experiment trials over a maximum of 100 epochs (generations) of evolution each. The fitness threshold for the successful solver is 15.5, and it is slightly less than the maximal fitness score that can be produced by the fitness function implementation used in the experiment. The maximal possible fitness value is 16.0, as given by the following  fitness function implementation:
 
 ```Python
 xor_inputs  = [(0.0, 0.0), (0.0, 1.0), (1.0, 0.0), (1.0, 1.0)]
