@@ -130,13 +130,13 @@ Average
 	generations/trial:	93.5
 
 Average among winners
-	Complexity:			12.687500
-	Fitness:			15.691308
+	Complexity:		12.687500
+	Fitness:		15.691308
 	generations/trial:	59.2
 
 Average for all organisms evaluated during experiment
-	Complexity:			10.790000
-	Fitness:			10.350439
+	Complexity:		10.790000
+	Fitness:		10.350439
 
 Efficiency score:		1.430373
 ```
@@ -163,13 +163,13 @@ Average
 	generations/trial:	35.5
 
 Average among winners
-	Complexity:			18.480000
-	Fitness:			15.727424
+	Complexity:		18.480000
+	Fitness:		15.727424
 	generations/trial:	35.5
 
 Average for all organisms evaluated during experiment
-	Complexity:			18.480000
-	Fitness:			15.727424
+	Complexity:		18.480000
+	Fitness:		15.727424
 
 Efficiency score:		11.088049
 ```
