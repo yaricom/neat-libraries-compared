@@ -67,10 +67,18 @@ In our experiments, the following metrics are used:
 The efficiency score metric can be estimated as follows:
 
 ```
-score = success_rate * avg_fitness_score / log(avg_epoch_duration * avg_winner_complexity * avg_generations_trial)
+score = success_rate * normalized_fitness_score / log(avg_epoch_duration * avg_winner_complexity * avg_generations_trial)
 ```
 
 We use the natural logarithm in the denominator to clamp down the denominator value to a range consistent with the value of fitness score in the numerator. The success rate, which is in range (0,1], effectively adjust the value of the efficiency score to reflect algorithm efficiency in finding a solution.
+
+The normalized fitness score can be estimated as follows:
+
+```
+normalized_fitness_score = 100 * avg_fitness_score / max_fitness_score
+```
+
+Where the *max_fitness_score* value is determined by the fitness function used in the problem. Also we scale normalized fitness score by the factor of 100 to equalize the nominator and denominator scales in the effitiency score formula.
 
 # The XOR Problem Benchmark
 The XOR problem solver is a classic computer science experiment in the field of reinforcement learning, which can not be solved without introducing non-linear execution to the solver algorithm. 
@@ -115,22 +123,22 @@ $ python xor_experiment_neat.py -t 100
 The output of the command above is similar to the following:
 
 ```txt
-Solved 19 trials from 100, success rate: 0.190000
+Solved 16 trials from 100, success rate: 0.160000
 Average
-	trial duration:		4545.045724 ms
-	epoch duration:		47.644999 ms
-	generations/trial:	92.5
+	trial duration:		4714.596846 ms
+	epoch duration:		48.995008 ms
+	generations/trial:	93.5
 
 Average among winners
-	Complexity:		14.000000
-	Fitness:		15.789716
-	generations/trial:	60.4
+	Complexity:			12.687500
+	Fitness:			15.691308
+	generations/trial:	59.2
 
 Average for all organisms evaluated during experiment
-	Complexity:		10.960000
-	Fitness:		10.709556
+	Complexity:			10.790000
+	Fitness:			10.350439
 
-Efficiency score:		0.271994
+Efficiency score:		1.430373
 ```
 
 The output above demonstrates that NEAT-Python library lagged behind other compared libraries in terms of execution speed and general performance. It can find successful solvers of the XOR problem only in about 20% of trials, which is very low compared to the other studied libraries.
@@ -150,20 +158,20 @@ The command above will be produce output similar to the following:
 ```txt
 Solved 100 trials from 100, success rate: 1.000000
 Average
-	trial duration:		378.530622 ms
-	epoch duration:		10.960883 ms
-	generations/trial:	35.0
+	trial duration:		382.263935 ms
+	epoch duration:		10.807755 ms
+	generations/trial:	35.5
 
 Average among winners
-	Complexity:		18.540000
-	Fitness:		15.774268
-	generations/trial:	35.0
+	Complexity:			18.480000
+	Fitness:			15.727424
+	generations/trial:	35.5
 
 Average for all organisms evaluated during experiment
-	Complexity:		18.540000
-	Fitness:		15.774268
+	Complexity:			18.480000
+	Fitness:			15.727424
 
-Efficiency score:		1.778749
+Efficiency score:		11.088049
 ```
 
 The MultiNEAT library demonstrates exceptional performance in the number of successful XOR problem solvers among all experiment trials. It has a success rate close to 100% and its execution speed almost for times better than of NEAT-Python library. All this combined gives it a much higher efficiency score in finding successful XOR solvers.
@@ -184,41 +192,40 @@ go run executor.go -out ./out/xor -context ./data/xor.neat -genome ./data/xorsta
 The command will produce the output similar to the following:
 
 ```text
-Solved 93 trials from 100, success rate: 0.930000
+Solved 91 trials from 100, success rate: 0.910000
 Average
-	Trial duration:		251.067745ms
-	Epoch duration:		1.790507ms
-	Generations/trial:	55.2
+	Trial duration:		233.568394ms
+	Epoch duration:		1.738699ms
+	Generations/trial:	53.3
 
-Champion found in 18 trial run
+Champion found in 99 trial run
 	Winner Nodes:		7
-	Winner Genes:		16
-	Winner Evals:		10150
+	Winner Genes:		15
+	Winner Evals:		9261
 
-	Diversity:		47
-	Complexity:		23
-	Age:			14
+	Diversity:		41
+	Complexity:		22
+	Age:			35
 	Fitness:		16.000000
 
 Average among winners
 	Winner Nodes:		7.0
 	Winner Genes:		13.9
-	Winner Evals:		10282.8
-	Generations/trial:	51.9
+	Winner Evals:		9633.3
+	Generations/trial:	48.7
 
-	Diversity:		40.096774
-	Complexity:		20.978495
-	Age:			25.397849
-	Fitness:		15.842292
+	Diversity:		38.076923
+	Complexity:		20.846154
+	Age:			25.439560
+	Fitness:		15.832682
 
 Averages for all organisms evaluated during experiment
-	Diversity:		23.227037
-	Complexity:		14.279039
-	Age:			14.253140
-	Fitness:		7.974019
+	Diversity:		22.478840
+	Complexity:		14.251525
+	Age:			13.704519
+	Fitness:		7.975999
 
-Efficiency score:		1.929031
-
+Efficiency score:		11.901923
 ```
 
 The output produced by goNEAT library put it in the first place among the studied libraries by solution search efficiency score. This result is achieved due to the fastest execution speed, which almost five times higher than of MultiNEAT, and the best average fitness score of the found solutions.
@@ -229,9 +236,9 @@ Further, we present the results of the evaluation of the different NEAT librarie
 
 | Library | Efficiency Score | Success Rate | Avg Solution Fitness | Avg Epoch Duration | Avg Solution Complexity | Avg Generations per Trial | Platform |
 | --- |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| goNEAT | 1.93 | 0.93 | 15.84 | 1.79 | 20.98 | 55.2 | GO |
-| MultiNEAT Python | 1.78 | 1.0 | 15.77 | 10.96 | 18.54 | 35.0 | C++, Python |
-| NEAT-Python | 0.27 | 0.19 | 15.79 | 47.64 | 14.0 | 92.5 | Python |
+| goNEAT | 11.90 | 0.91 | 15.83 | 1.74 | 20.85 | 53.3 | GO |
+| MultiNEAT Python | 11.09 | 1.0 | 15.73 | 10.81 | 18.48 | 35.5 | C++, Python |
+| NEAT-Python | 1.43 | 0.16 | 15.69 | 49.00 | 12.69 | 93.5 | Python |
 
 In the results table, the libraries are ordered in descending order based on their efficiency score value. Thus, at the top row placed the most efficient library, and at the bottom row is the least efficient one.
 
