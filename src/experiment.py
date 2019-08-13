@@ -21,7 +21,7 @@ class ExperimentEvaluationResults:
         self.success_rate = 0
         self.efficiency_score = 0
 
-    def calculate_statistics(self):
+    def calculate_statistics(self, max_fitness):
         """
         The function to calculate the agregate statistics over collected experiment reults.
         """
@@ -44,9 +44,14 @@ class ExperimentEvaluationResults:
         # We are interested in efficient solver search solution that take 
         # less time per epoch, less generations per trial, and produce less complicated winner genomes.
         # At the same time it should have maximal fitness score and maximal success rate among trials.
+        fitness_score = self.avg_winner_fitness
+        if max_fitness > 0:
+            fitness_score /= max_fitness
+            fitness_score *= 100
+
         self.efficiency_score = self.avg_epoch_duration * self.avg_trial_generations * self.avg_winner_complexity
         if self.efficiency_score > 0:
-            self.efficiency_score = self.success_rate * self.avg_winner_fitness / math.log(self.efficiency_score)
+            self.efficiency_score = self.success_rate * fitness_score / math.log(self.efficiency_score)
 
     def print_statistics(self):
         """
@@ -65,7 +70,7 @@ class ExperimentEvaluationResults:
 #
 # The common experiment evaluator code
 #
-def evaluate_experiment(args, eval_function, config, out_dir, save_results=False, view_results=False):
+def evaluate_experiment(args, eval_function, config, out_dir, max_fitness=-1, save_results=False, view_results=False):
     """
     The function to evaluate given experiment specified by provided evaluation function. The evaluation
     results will be returned as data object.
@@ -74,6 +79,7 @@ def evaluate_experiment(args, eval_function, config, out_dir, save_results=False
         eval_function:  The evaluation function running one trial of experiment
         config:         The algorithm-specific configuration parameters
         out_dir:        The directory to store ouput results if any
+        max_fitness:    The maximal fitness score value for experiment or -1 if not defined.
         save_results:   The flag to control if output results should be saved into output directory
         view_results:   The flag to control whether intermediate output reults should be printed.
     Returns:
@@ -95,5 +101,5 @@ def evaluate_experiment(args, eval_function, config, out_dir, save_results=False
         experiment.generations[i] = generation
 
     experiment.elapsed_time = time.time() - start_time
-    experiment.calculate_statistics()
+    experiment.calculate_statistics(max_fitness=max_fitness)
     return experiment

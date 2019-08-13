@@ -70,13 +70,13 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=F
     best_genome = p.run(eval_genomes, n=n_generations)
 
     # Check if the best genome is a winning Sinle-Pole balancing controller 
-    net = neat.nn.FeedForwardNetwork.create(best_genome, config)
+    #net = neat.nn.FeedForwardNetwork.create(best_genome, config)
 
     # Find best genome complexity
     complexity = len(best_genome.connections) + len(best_genome.nodes) + 4 # four input nodes
 
     # Test if solution was found
-    best_genome_fitness = cart.eval_fitness(net, max_bal_steps=max_balancing_steps_num)
+    best_genome_fitness = best_genome.fitness # cart.eval_fitness(net, max_bal_steps=max_balancing_steps_num)#
     solution_found = (best_genome_fitness >= config.fitness_threshold)
     if solution_found:
         print("Trial: %2d\tgeneration: %d\tfitness: %f\tcomplexity: %d\tseed: %d" % (trial_id, p.generation, best_genome_fitness, complexity, seed))
@@ -125,6 +125,7 @@ if __name__ == '__main__':
     results = evaluate_experiment(args, 
                         eval_function=run_experiment, 
                         config=config_path, 
+                        max_fitness=1.0, # the maximal allowed fitness value as given by fitness function
                         out_dir=out_dir, 
                         save_results=args.save_results)
     

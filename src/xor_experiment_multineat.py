@@ -206,6 +206,7 @@ if __name__ == '__main__':
     results = evaluate_experiment(args, 
                         eval_function=run_experiment, 
                         config=params, 
+                        max_fitness=16.0, # The maximal fitness score in accordance with fitness function definition
                         out_dir=out_dir)
                         
     results.print_statistics()
