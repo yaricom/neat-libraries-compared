@@ -1,0 +1,125 @@
+
+**************************
+  MultiNEAT Library
+  XOR Experiment
+**************************
+
+Trial:  0	generation: 19	fitness: 15.545352	complexity: 12	seed: 1565702837
+Trial:  1	generation: 42	fitness: 15.772317	complexity: 12	seed: 1565702837
+Trial:  2	generation: 42	fitness: 15.776569	complexity: 28	seed: 1565702838
+Trial:  3	generation: 46	fitness: 15.729514	complexity: 12	seed: 1565702838
+Trial:  4	generation: 38	fitness: 15.872030	complexity: 17	seed: 1565702839
+Trial:  5	generation: 43	fitness: 15.717257	complexity: 19	seed: 1565702839
+Trial:  6	generation: 81	fitness: 15.543225	complexity: 18	seed: 1565702840
+Trial:  7	generation: 19	fitness: 15.953158	complexity: 18	seed: 1565702841
+Trial:  8	generation: 30	fitness: 15.628529	complexity: 25	seed: 1565702841
+Trial:  9	generation: 32	fitness: 15.926091	complexity: 12	seed: 1565702841
+Trial: 10	generation: 59	fitness: 15.913038	complexity: 19	seed: 1565702841
+Trial: 11	generation: 31	fitness: 15.782145	complexity: 18	seed: 1565702842
+Trial: 12	generation: 29	fitness: 15.724920	complexity: 18	seed: 1565702842
+Trial: 13	generation: 55	fitness: 15.677769	complexity: 18	seed: 1565702843
+Trial: 14	generation: 16	fitness: 15.597589	complexity: 16	seed: 1565702843
+Trial: 15	generation: 36	fitness: 15.984284	complexity: 18	seed: 1565702843
+Trial: 16	generation: 14	fitness: 15.523326	complexity: 12	seed: 1565702844
+Trial: 17	generation: 28	fitness: 15.986046	complexity: 12	seed: 1565702844
+Trial: 18	generation: 29	fitness: 15.714214	complexity: 12	seed: 1565702844
+Trial: 19	generation: 40	fitness: 15.888803	complexity: 19	seed: 1565702844
+Trial: 20	generation: 18	fitness: 15.798584	complexity: 19	seed: 1565702845
+Trial: 21	generation: 19	fitness: 15.551594	complexity: 21	seed: 1565702845
+Trial: 22	generation: 49	fitness: 15.581150	complexity: 19	seed: 1565702845
+Trial: 23	generation: 27	fitness: 15.632388	complexity: 19	seed: 1565702846
+Trial: 24	generation: 8	fitness: 15.695028	complexity: 12	seed: 1565702846
+Trial: 25	generation: 28	fitness: 15.538869	complexity: 12	seed: 1565702846
+Trial: 26	generation: 23	fitness: 15.536379	complexity: 18	seed: 1565702847
+Trial: 27	generation: 57	fitness: 15.551823	complexity: 25	seed: 1565702847
+Trial: 28	generation: 36	fitness: 15.563998	complexity: 26	seed: 1565702847
+Trial: 29	generation: 23	fitness: 15.961121	complexity: 12	seed: 1565702848
+Trial: 30	generation: 35	fitness: 15.995602	complexity: 22	seed: 1565702848
+Trial: 31	generation: 41	fitness: 15.502853	complexity: 37	seed: 1565702849
+Trial: 32	generation: 61	fitness: 15.615521	complexity: 26	seed: 1565702849
+Trial: 33	generation: 13	fitness: 15.724038	complexity: 12	seed: 1565702850
+Trial: 34	generation: 29	fitness: 15.976015	complexity: 18	seed: 1565702850
+Trial: 35	generation: 76	fitness: 15.638189	complexity: 33	seed: 1565702850
+Trial: 36	generation: 26	fitness: 15.574949	complexity: 12	seed: 1565702851
+Trial: 37	generation: 29	fitness: 15.957022	complexity: 19	seed: 1565702851
+Trial: 38	generation: 51	fitness: 15.577177	complexity: 27	seed: 1565702851
+Trial: 39	generation: 51	fitness: 15.935847	complexity: 37	seed: 1565702852
+Trial: 40	generation: 27	fitness: 15.515697	complexity: 12	seed: 1565702853
+Trial: 41	generation: 63	fitness: 15.909492	complexity: 12	seed: 1565702853
+Trial: 42	generation: 47	fitness: 15.744705	complexity: 18	seed: 1565702854
+Trial: 43	generation: 47	fitness: 15.585569	complexity: 33	seed: 1565702854
+Trial: 44	generation: 26	fitness: 15.526437	complexity: 12	seed: 1565702855
+Trial: 45	generation: 38	fitness: 15.649537	complexity: 28	seed: 1565702855
+Trial: 46	generation: 59	fitness: 15.694012	complexity: 12	seed: 1565702855
+Trial: 47	generation: 22	fitness: 15.913935	complexity: 18	seed: 1565702856
+Trial: 48	generation: 52	fitness: 15.711240	complexity: 18	seed: 1565702856
+Trial: 49	generation: 30	fitness: 15.992611	complexity: 18	seed: 1565702857
+Trial: 50	generation: 31	fitness: 15.634875	complexity: 19	seed: 1565702857
+Trial: 51	generation: 41	fitness: 15.714203	complexity: 18	seed: 1565702857
+Trial: 52	generation: 25	fitness: 15.997920	complexity: 22	seed: 1565702858
+Trial: 53	generation: 59	fitness: 15.878282	complexity: 26	seed: 1565702858
+Trial: 54	generation: 60	fitness: 15.972362	complexity: 34	seed: 1565702859
+Trial: 55	generation: 24	fitness: 15.952715	complexity: 19	seed: 1565702859
+Trial: 56	generation: 40	fitness: 15.965020	complexity: 25	seed: 1565702860
+Trial: 57	generation: 36	fitness: 15.681888	complexity: 12	seed: 1565702860
+Trial: 58	generation: 32	fitness: 15.668793	complexity: 18	seed: 1565702860
+Trial: 59	generation: 18	fitness: 15.744075	complexity: 19	seed: 1565702861
+Trial: 60	generation: 37	fitness: 15.571874	complexity: 12	seed: 1565702861
+Trial: 61	generation: 12	fitness: 15.984416	complexity: 12	seed: 1565702861
+Trial: 62	generation: 13	fitness: 15.941830	complexity: 12	seed: 1565702861
+Trial: 63	generation: 20	fitness: 15.844291	complexity: 18	seed: 1565702862
+Trial: 64	generation: 18	fitness: 15.653912	complexity: 17	seed: 1565702862
+Trial: 65	generation: 17	fitness: 15.641763	complexity: 16	seed: 1565702862
+Trial: 66	generation: 34	fitness: 15.611380	complexity: 22	seed: 1565702862
+Trial: 67	generation: 26	fitness: 15.569834	complexity: 12	seed: 1565702863
+Trial: 68	generation: 36	fitness: 15.933009	complexity: 27	seed: 1565702863
+Trial: 69	generation: 34	fitness: 15.542662	complexity: 19	seed: 1565702864
+Trial: 70	generation: 30	fitness: 15.845986	complexity: 19	seed: 1565702864
+Trial: 71	generation: 39	fitness: 15.603204	complexity: 18	seed: 1565702864
+Trial: 72	generation: 28	fitness: 15.565037	complexity: 12	seed: 1565702865
+Trial: 73	generation: 40	fitness: 15.772399	complexity: 12	seed: 1565702865
+Trial: 74	generation: 76	fitness: 15.960698	complexity: 19	seed: 1565702865
+Trial: 75	generation: 28	fitness: 15.810938	complexity: 18	seed: 1565702866
+Trial: 76	generation: 55	fitness: 15.955324	complexity: 28	seed: 1565702866
+Trial: 77	generation: 39	fitness: 15.754614	complexity: 18	seed: 1565702867
+Trial: 78	generation: 36	fitness: 15.881735	complexity: 20	seed: 1565702867
+Trial: 79	generation: 19	fitness: 15.650645	complexity: 12	seed: 1565702868
+Trial: 80	generation: 11	fitness: 15.596132	complexity: 12	seed: 1565702868
+Trial: 81	generation: 19	fitness: 15.531717	complexity: 12	seed: 1565702868
+Trial: 82	generation: 27	fitness: 15.536860	complexity: 12	seed: 1565702868
+Trial: 83	generation: 19	fitness: 15.543397	complexity: 12	seed: 1565702869
+Trial: 84	generation: 27	fitness: 15.501055	complexity: 18	seed: 1565702869
+Trial: 85	generation: 24	fitness: 15.618849	complexity: 12	seed: 1565702869
+Trial: 86	generation: 21	fitness: 15.516635	complexity: 12	seed: 1565702869
+Trial: 87	generation: 61	fitness: 15.881728	complexity: 33	seed: 1565702870
+Trial: 88	generation: 51	fitness: 15.631366	complexity: 18	seed: 1565702870
+Trial: 89	generation: 22	fitness: 15.984368	complexity: 19	seed: 1565702871
+Trial: 90	generation: 42	fitness: 15.870326	complexity: 25	seed: 1565702871
+Trial: 91	generation: 57	fitness: 15.542992	complexity: 17	seed: 1565702872
+Trial: 92	generation: 15	fitness: 15.549426	complexity: 19	seed: 1565702872
+Trial: 93	generation: 33	fitness: 15.651312	complexity: 28	seed: 1565702872
+Trial: 94	generation: 31	fitness: 15.988689	complexity: 18	seed: 1565702873
+Trial: 95	generation: 49	fitness: 15.507452	complexity: 19	seed: 1565702873
+Trial: 96	generation: 67	fitness: 15.514049	complexity: 25	seed: 1565702874
+Trial: 97	generation: 63	fitness: 15.602836	complexity: 12	seed: 1565702874
+Trial: 98	generation: 33	fitness: 15.685183	complexity: 12	seed: 1565702875
+Trial: 99	generation: 30	fitness: 15.774810	complexity: 16	seed: 1565702875
+
+Solved 100 trials from 100, success rate: 1.000000
+Average
+	trial duration:		382.263935 ms
+	epoch duration:		10.807755 ms
+	generations/trial:	35.5
+
+Average among winners
+	Complexity:		18.480000
+	Fitness:		15.727424
+	generations/trial:	35.5
+
+Average for all organisms evaluated during experiment
+	Complexity:		18.480000
+	Fitness:		15.727424
+
+Efficiency score:		11.088049
+
+Experiment's elapsed time:	38.227 sec

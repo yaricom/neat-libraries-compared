@@ -1,0 +1,123 @@
+
+**************************
+  NEAT-Python Library
+  XOR Experiment
+**************************
+
+Trial:  0	FAILED		fitness: 9.000000	complexity: 14	seed: 1565702235
+Trial:  1	FAILED		fitness: 13.141544	complexity: 22	seed: 1565702240
+Trial:  2	FAILED		fitness: 9.000000	complexity: 18	seed: 1565702244
+Trial:  3	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702250
+Trial:  4	FAILED		fitness: 9.024340	complexity: 12	seed: 1565702255
+Trial:  5	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702259
+Trial:  6	FAILED		fitness: 14.101149	complexity: 9	seed: 1565702264
+Trial:  7	FAILED		fitness: 9.000029	complexity: 11	seed: 1565702269
+Trial:  8	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702273
+Trial:  9	FAILED		fitness: 9.000000	complexity: 8	seed: 1565702278
+Trial: 10	FAILED		fitness: 10.413303	complexity: 20	seed: 1565702283
+Trial: 11	FAILED		fitness: 9.000000	complexity: 8	seed: 1565702291
+Trial: 12	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702296
+Trial: 13	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702300
+Trial: 14	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702305
+Trial: 15	FAILED		fitness: 9.000000	complexity: 6	seed: 1565702309
+Trial: 16	FAILED		fitness: 9.000000	complexity: 17	seed: 1565702314
+Trial: 17	FAILED		fitness: 9.721186	complexity: 22	seed: 1565702319
+Trial: 18	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702324
+Trial: 19	generation: 89	fitness: 15.898123	complexity: 20	seed: 1565702329
+Trial: 20	FAILED		fitness: 9.000000	complexity: 13	seed: 1565702333
+Trial: 21	FAILED		fitness: 9.000000	complexity: 15	seed: 1565702337
+Trial: 22	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702344
+Trial: 23	FAILED		fitness: 9.000031	complexity: 13	seed: 1565702348
+Trial: 24	FAILED		fitness: 9.000000	complexity: 12	seed: 1565702352
+Trial: 25	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702357
+Trial: 26	generation: 58	fitness: 15.636039	complexity: 12	seed: 1565702362
+Trial: 27	FAILED		fitness: 9.000000	complexity: 13	seed: 1565702363
+Trial: 28	FAILED		fitness: 9.320737	complexity: 16	seed: 1565702368
+Trial: 29	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702374
+Trial: 30	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702380
+Trial: 31	generation: 55	fitness: 15.682033	complexity: 14	seed: 1565702385
+Trial: 32	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702387
+Trial: 33	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702393
+Trial: 34	generation: 85	fitness: 15.712332	complexity: 9	seed: 1565702397
+Trial: 35	generation: 77	fitness: 15.798546	complexity: 15	seed: 1565702402
+Trial: 36	generation: 37	fitness: 15.756681	complexity: 9	seed: 1565702404
+Trial: 37	FAILED		fitness: 9.000000	complexity: 12	seed: 1565702406
+Trial: 38	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702410
+Trial: 39	FAILED		fitness: 11.628895	complexity: 20	seed: 1565702415
+Trial: 40	FAILED		fitness: 15.329713	complexity: 15	seed: 1565702420
+Trial: 41	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702424
+Trial: 42	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702428
+Trial: 43	FAILED		fitness: 9.000000	complexity: 17	seed: 1565702432
+Trial: 44	generation: 79	fitness: 15.775171	complexity: 11	seed: 1565702437
+Trial: 45	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702440
+Trial: 46	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702445
+Trial: 47	FAILED		fitness: 9.000000	complexity: 19	seed: 1565702450
+Trial: 48	FAILED		fitness: 9.000000	complexity: 25	seed: 1565702457
+Trial: 49	FAILED		fitness: 10.138090	complexity: 12	seed: 1565702464
+Trial: 50	FAILED		fitness: 9.000000	complexity: 17	seed: 1565702469
+Trial: 51	generation: 84	fitness: 15.600634	complexity: 15	seed: 1565702475
+Trial: 52	FAILED		fitness: 9.000000	complexity: 10	seed: 1565702479
+Trial: 53	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702484
+Trial: 54	FAILED		fitness: 9.000000	complexity: 21	seed: 1565702488
+Trial: 55	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702495
+Trial: 56	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702500
+Trial: 57	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702504
+Trial: 58	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702510
+Trial: 59	generation: 36	fitness: 15.598926	complexity: 12	seed: 1565702515
+Trial: 60	FAILED		fitness: 15.163955	complexity: 24	seed: 1565702516
+Trial: 61	FAILED		fitness: 9.000000	complexity: 11	seed: 1565702521
+Trial: 62	FAILED		fitness: 9.000000	complexity: 10	seed: 1565702527
+Trial: 63	generation: 42	fitness: 15.686913	complexity: 11	seed: 1565702534
+Trial: 64	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702535
+Trial: 65	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702539
+Trial: 66	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702545
+Trial: 67	generation: 58	fitness: 15.753525	complexity: 11	seed: 1565702550
+Trial: 68	FAILED		fitness: 9.000000	complexity: 15	seed: 1565702553
+Trial: 69	FAILED		fitness: 9.000000	complexity: 11	seed: 1565702559
+Trial: 70	generation: 78	fitness: 15.754233	complexity: 21	seed: 1565702564
+Trial: 71	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702567
+Trial: 72	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702572
+Trial: 73	FAILED		fitness: 9.000000	complexity: 10	seed: 1565702578
+Trial: 74	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702583
+Trial: 75	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702588
+Trial: 76	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702593
+Trial: 77	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702598
+Trial: 78	FAILED		fitness: 9.000000	complexity: 11	seed: 1565702603
+Trial: 79	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702610
+Trial: 80	FAILED		fitness: 9.000000	complexity: 12	seed: 1565702615
+Trial: 81	FAILED		fitness: 9.000000	complexity: 12	seed: 1565702621
+Trial: 82	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702628
+Trial: 83	FAILED		fitness: 9.000000	complexity: 19	seed: 1565702632
+Trial: 84	generation: 47	fitness: 15.595699	complexity: 13	seed: 1565702639
+Trial: 85	generation: 36	fitness: 15.683294	complexity: 12	seed: 1565702641
+Trial: 86	generation: 31	fitness: 15.554294	complexity: 9	seed: 1565702642
+Trial: 87	FAILED		fitness: 9.000000	complexity: 12	seed: 1565702643
+Trial: 88	FAILED		fitness: 9.000000	complexity: 19	seed: 1565702647
+Trial: 89	FAILED		fitness: 9.000000	complexity: 12	seed: 1565702653
+Trial: 90	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702659
+Trial: 91	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702663
+Trial: 92	FAILED		fitness: 9.000000	complexity: 15	seed: 1565702668
+Trial: 93	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702672
+Trial: 94	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702677
+Trial: 95	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702682
+Trial: 96	generation: 56	fitness: 15.574482	complexity: 9	seed: 1565702688
+Trial: 97	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702690
+Trial: 98	FAILED		fitness: 9.000000	complexity: 5	seed: 1565702696
+Trial: 99	FAILED		fitness: 9.000000	complexity: 9	seed: 1565702700
+
+Solved 16 trials from 100, success rate: 0.160000
+Average
+	trial duration:		4714.596846 ms
+	epoch duration:		48.995008 ms
+	generations/trial:	93.5
+
+Average among winners
+	Complexity:		12.687500
+	Fitness:		15.691308
+	generations/trial:	59.2
+
+Average for all organisms evaluated during experiment
+	Complexity:		10.790000
+	Fitness:		10.350439
+
+Efficiency score:		1.430373
