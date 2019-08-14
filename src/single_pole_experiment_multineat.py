@@ -35,14 +35,15 @@ class ANNWrapper:
         return self.net.Output()
 
 def tanh_action_evaluator(nn_output):
-    return 0 if nn_output < 0.5 else 1
+    return 0 if nn_output[0] < 0.5 else 1
 
 def evaluate(genome):
     multi_net = NEAT.NeuralNetwork()
     genome.BuildPhenotype(multi_net)
 
     multi_net.Flush()
-    fitness = cart.eval_fitness(net=ANNWrapper(multi_net), action_evaluator=tanh_action_evaluator)
+    fitness = cart.eval_fitness(net=ANNWrapper(multi_net), 
+                                action_evaluator=cart.two_ouputs_action_evaluator)# tanh_action_evaluator)
     return fitness
 
 
@@ -68,7 +69,7 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=F
         solution was found, the generation when solution was found, the complextity of best genome, and the fitness
         of best genome.
     """
-    g = NEAT.Genome(0, 4+1, 0, 1, False, NEAT.ActivationFunction.TANH, 
+    g = NEAT.Genome(0, 4+1, 0, 1+1, False, NEAT.ActivationFunction.TANH, 
                 NEAT.ActivationFunction.TANH, 0, params, 0)
     pop = NEAT.Population(g, params, True, 1.0, trial_id)
 

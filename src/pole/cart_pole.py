@@ -27,6 +27,13 @@ random.seed(42)
 # The maximal fitness score value
 MAX_FITNESS = 1.0
 
+def two_ouputs_action_evaluator(nn_output):
+    action = 1
+    if nn_output[0] > nn_output[1]:
+        action = 0
+
+    return action
+
 def do_step(action, x, x_dot, theta, theta_dot):
     """
     The function to perform the one step of simulation over
@@ -98,7 +105,7 @@ def run_cart_pole_simulation(net, max_bal_steps, action_evaluator, random_start=
         # Activate the NET
         output = net.activate(input)
         # Make action values discrete
-        action = action_evaluator(output[0])
+        action = action_evaluator(output)
 
         # Apply action to the simulated cart-pole
         x, x_dot, theta, theta_dot = do_step(   action = action, 

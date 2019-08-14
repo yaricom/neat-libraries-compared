@@ -21,7 +21,7 @@ import pole.cart_pole as cart
 from experiment import evaluate_experiment
 
 def sigmoid_action_evaluator(nn_output):
-    return 0 if nn_output < 0.5 else 1
+    return 0 if nn_output[0] < 0.5 else 1
 
 def eval_genomes(genomes, config):
     """
@@ -36,7 +36,8 @@ def eval_genomes(genomes, config):
     for _, genome in genomes:
         genome.fitness = 0.0
         net = neat.nn.FeedForwardNetwork.create(genome, config)
-        fitness = cart.eval_fitness(net, action_evaluator=sigmoid_action_evaluator)
+        fitness = cart.eval_fitness(net=net, 
+                                    action_evaluator=cart.two_ouputs_action_evaluator)#sigmoid_action_evaluator)
         genome.fitness = fitness
 
 def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=False, save_results=True):
