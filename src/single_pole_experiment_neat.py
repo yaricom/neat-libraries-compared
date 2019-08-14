@@ -20,8 +20,8 @@ import pole.cart_pole as cart
 
 from experiment import evaluate_experiment
 
-# The maximal number of balancing steps
-max_balancing_steps_num = 500000
+def sigmoid_action_evaluator(nn_output):
+    return 0 if nn_output < 0.5 else 1
 
 def eval_genomes(genomes, config):
     """
@@ -36,7 +36,7 @@ def eval_genomes(genomes, config):
     for _, genome in genomes:
         genome.fitness = 0.0
         net = neat.nn.FeedForwardNetwork.create(genome, config)
-        fitness = cart.eval_fitness(net, max_bal_steps=max_balancing_steps_num)
+        fitness = cart.eval_fitness(net, action_evaluator=sigmoid_action_evaluator)
         genome.fitness = fitness
 
 def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=False, save_results=True):
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     results = evaluate_experiment(args, 
                         eval_function=run_experiment, 
                         config=config_path, 
-                        max_fitness=1.0, # the maximal allowed fitness value as given by fitness function
+                        max_fitness=cart.MAX_FITNESS, # the maximal allowed fitness value as given by fitness function
                         out_dir=out_dir, 
                         save_results=args.save_results)
     
