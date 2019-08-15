@@ -246,6 +246,165 @@ In the results table, the libraries are ordered in descending order based on the
 
 The NEAT-Python library get the lowest efficiency score, but the solutions it was able to produce are the less complex ones. The goNEAT and MultiNEAT libraries are on par in terms of complexity and success rate of found solutions, but the former is much faster in terms of execution speed (almost 5x).
 
+# The Single Pole-Balancing Problem Benchmark
+
+The single-pole balancer (a.k.a. *inverted pendulum*) is an unstable pendulum that has its center of mass above its pivot point. It can be stabilized by applying external forces under control of a specialized system that monitors the angle of the pole and moves the pivot point horizontally back and forth under the center of mass as it starts to fall. The single-pole balancer is a classic problem in dynamics and control theory that is used as a benchmark for testing control strategies, including the strategies based on the Reinforcement Learning methods. We are particularly interested in the implementation of the specific control algorithm that use neuroevolution-based methods to stabilize the inverted pendulum for a given amount of time.
+
+The experiment described here considers the simulation of the inverted pendulum implemented as a cart that can move horizontally with a pivot point mounted on top of it, i.e., the cart and pole apparatus. The scheme of the described apparatus is shown in the following image:
+
+![Single Pole-Balancing Scheme][single_pole-balancing_scheme]
+
+The goal of the controller is to exert a sequence of forces, Fx, to the center of mass of the cart such that the pole balanced for a specific (or infinite) amount of time and the cart stays within the track, i.e., doesn’t hit left or right walls. Thus, we can say that the state of the cart-pole system must be kept to avoid certain regions of the state space, qualifying the balancer’s task as an avoidance control problem. There is no unique solution, and any trajectory drawn through the state space that miss regions to be avoided is acceptable.
+
+The learning algorithm needs to receive a minimal amount of knowledge about the task from the environment to train pole-balancing controller. Such knowledge should reflect how close is our controller to the goal. The goal of the pole-balancing problem is to stabilize an inherently unstable
+system and keep it balanced as long as possible but at least the expected number of time steps as specified in the experiment configuration (500 000). Thus, the objective function must optimize the duration of stable pole-balancing and can be defined as the logarithmic difference between the expected number of steps and the actual number of steps that obtained during the evaluation of the phenotype ANN. The loss function is given as follows:
+```
+loss = (log(t_max) - log(t_eval)) / log(t_max)
+```
+Where t_max is an expected number of time steps from the configuration of the experiment, and t_eval is the actual number of time steps during which the controller was able to maintain a stable state of the pole-balancer within bounds. Please note that loss value is in range [0.0, 1.0]
+
+And the fitness score is:
+```
+fitness = 1.0 - loss
+```
+
+### The NEAT-Python Library Results
+
+In the Single Pole-Balancing experiment, the NEAT-Python library gets the efficiency score on par with MultiNEAT Python Library, but significantly lower than of goNEAT library.
+
+The Single Pole-Balancing experiment with NEAT-Python library can be started with the following commands:
+
+```bash
+$ conda activate neat
+$ cd src
+$ python single_pole_experiment_neat.py -t 100
+```
+The output of the command above is similar to the following:
+
+```txt
+Solved 100 trials from 100, success rate: 1.000000
+Average
+	trial duration:		7661.165447 ms
+	epoch duration:		2191.749573 ms
+	generations/trial:	3.9
+
+Average among winners
+	Complexity:		13.470000
+	Fitness:		1.000000
+	generations/trial:	3.9
+
+Average for all organisms evaluated during experiment
+	Complexity:		13.470000
+	Fitness:		1.000000
+
+Efficiency score:		8.575182
+```
+As it can be seen from the results above, the NEAT-Python library demonstrates very long execution time of one epoch but can find a solution within a small number of epochs and the complexity of the produced solution is the lowest among tested libraries.
+
+### The MultiNEAT Library Results
+
+In the Single Pole-Balancing experiment, the MultiNEAT Python library gets the efficiency score on par with the NEAT-Python Library, but significantly lower than of goNEAT library.
+
+The Single Pole-Balancing experiment with MultiNEAT library can be executed as follows:
+
+```bash
+$ conda activate neat
+$ cd src
+$ python single_pole_experiment_multineat.py -t 100
+```
+The command above will produce output similar to the following:
+
+```txt
+Solved 100 trials from 100, success rate: 1.000000
+Average
+	trial duration:		3930.903034 ms
+	epoch duration:		1369.127191 ms
+	generations/trial:	4.6
+
+Average among winners
+	Complexity:		17.170000
+	Fitness:		1.000000
+	generations/trial:	4.6
+
+Average for all organisms evaluated during experiment
+	Complexity:		17.170000
+	Fitness:		1.000000
+
+Efficiency score:		8.630517
+```
+The MultiNEAT Python library demonstrates execution speed improvements (almost 2x) compared to the NEAT-Python library, but it takes more epochs to find a solution and found solutions is more complex. This results in the efficiency score value comparable with the one obtained for NEAT-Python library.
+
+### The goNEAT Library Results
+
+In Single Pole-Balancing experiment, the goNEAT obtains the higher efficiency score value due to its outstanding execution speed compared to its Python counterparts.
+
+For the instruction of how to install and use a library, please refer to the [goNEAT][6] GitHub repository.
+
+After the GO language environment is ready and the library is installed, you can run a  Single Pole-Balancing experiment with the following command:
+
+```bash
+cd $GOPATH/src/github.com/yaricom/goNEAT
+go run executor.go -out ./out/pole1 -context ./data/pole1_150.neat -genome ./data/pole1startgenes -experiment cart_pole
+```
+The command will produce the output similar to the following:
+
+```txt
+Solved 100 trials from 100, success rate: 1.000000
+Average
+	Trial duration:		207.348488ms
+	Epoch duration:		31.933857ms
+	Generations/trial:	12.5
+
+Champion found in 57 trial run
+	Winner Nodes:		7
+	Winner Genes:		9
+	Winner Evals:		1112
+
+	Diversity:		73
+	Complexity:		16
+	Age:			3
+	Fitness:		1.000000
+
+Average among winners
+	Winner Nodes:		7.2
+	Winner Genes:		11.9
+	Winner Evals:		1794.0
+	Generations/trial:	12.5
+
+	Diversity:		64.100000
+	Complexity:		18.980000
+	Age:			3.710000
+	Fitness:		1.000000
+
+Averages for all organisms evaluated during experiment
+	Diversity:		41.629055
+	Complexity:		18.282251
+	Age:			2.633224
+	Fitness:		0.170506
+
+Efficiency score:		11.195725
+```
+
+The goNEAT library spent more epochs to find winner solutions and produced the most complex ones compared to its Python counterparts. But it still received the highest efficiency score due to outstanding execution speed (almost 70x better than NEAT-Python).
+
+## The Single Pole-Balancing Problem Results
+
+Further, we present the results of the evaluation of the different NEAT libraries in the task of finding successful Single Pole-Balancer controllers.
+
+| Library | Efficiency Score | Success Rate | Avg Solution Fitness | Avg Epoch Duration | Avg Solution Complexity | Avg Generations per Trial | Platform |
+| --- |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| goNEAT | 11.20 | 1.0 | 1.0  | 31.93 | 18.98 | 12.5 | GO |
+| MultiNEAT Python | 8.63 | 1.0 | 1.0  | 1369.13 | 17.17 | 4.6 | C++, Python |
+| NEAT-Python | 8.58 | 1.0 | 1.0  | 2191.75 | 13.47 | 3.9 | Python |
+
+In the results table, the libraries are ordered in descending order based on their efficiency score value. Thus, at the top row placed the most efficient library, and at the bottom row is the least efficient one.
+
+### The Single Pole-Balancing Problem Conclusion
+
+The NEAT-Python and MultiNEAT libraries obtained similar efficiency scores and were able to find the successful single pole-balancing controllers within the smallest number of evolution epochs. The NEAT-Python library, as well as in the previous experiment produced the less complex ANN of successful controllers due to its way to work with BIAS nodes. In the NEAT Python library, the BIAS values are integrated into hidden and output nodes, rather than presented as separate nodes as it is done in other libraries. As a result, the produced controller ANN has fewer nodes and links.
+
+The goNEAT library received the highest efficiency score value mostly due to its outstanding execution speed, which is almost 70x times faster than of NEAT-Python library.
+
 # Credits
 The source code is maintained and managed by [Iaroslav Omelianenko][3]
 
@@ -256,3 +415,4 @@ The source code is maintained and managed by [Iaroslav Omelianenko][3]
 [5]:https://github.com/peter-ch/MultiNEAT
 [6]:https://github.com/yaricom/goNEAT
 
+[single_pole-balancing_scheme]: https://github.com/yaricom/goNEAT/blob/master/contents/single_pole-balancing.jpg "The single pole-balancing experimental setup"
