@@ -1,5 +1,5 @@
 #
-# This file provides the source code of the Single-Pole balancing experiment using on NEAT-Python library
+# This file provides the source code of the Single-Pole balancing experiment using the NEAT-Python library
 #
 
 # The Python standard library import
@@ -86,7 +86,7 @@ def run_experiment(config_file, trial_id, n_generations, out_dir, view_results=F
 
     # Visualize the experiment results
     if save_results:
-        node_names = {-1:'x', -2:'dot_x', -3:'θ', -4:'dot_θ', 0:'action'}
+        node_names = {-1:'x', -2:'dot_x', -3:'θ', -4:'dot_θ', 0:'action_1', 1:'action_2'}
         visualize.draw_net(config, best_genome, view=view_results, node_names=node_names, directory=out_dir, fmt='svg')
         visualize.plot_stats(stats, ylog=False, view=view_results, filename=os.path.join(out_dir, 'avg_fitness.svg'))
         visualize.plot_species(stats, view=view_results, filename=os.path.join(out_dir, 'speciation.svg'))
