@@ -267,6 +267,7 @@ And the fitness score is:
 ```
 fitness = 1.0 - loss
 ```
+The evaluation is done in 100 experiment trials over a maximum of 100 epochs (generations) of evolution each. The fitness threshold for the successful solver is 1.0, which is also the maximal possible fitness value with a given fitness function.
 
 ### The NEAT-Python Library Results
 
