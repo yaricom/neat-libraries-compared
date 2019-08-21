@@ -24,15 +24,7 @@ import utils
 import pole.cart_pole as cart
 
 from experiment import evaluate_experiment
-
-class ANNWrapper:
-    def __init__(self, multi_net):
-        self.net = multi_net
-
-    def activate(self, input):
-        self.net.Input(input + [1.0])
-        self.net.Activate()
-        return self.net.Output()
+from experiment import ANNWrapper
 
 def tanh_action_evaluator(nn_output):
     return 0 if nn_output[0] < 0.5 else 1
