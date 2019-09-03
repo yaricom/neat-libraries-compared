@@ -449,12 +449,12 @@ Average
 
 Average among winners
 	Complexity:		12.081081
-	Fitness:			1.000000
+	Fitness:		1.000000
 	generations/trial:	52.2
 
 Average for all organisms evaluated during experiment
 	Complexity:		12.300000
-	Fitness:			0.805440
+	Fitness:		0.805440
 
 Efficiency score:		2.502670
 
@@ -484,12 +484,12 @@ Average
 
 Average among winners
 	Complexity:		30.000000
-	Fitness:			1.000000
+	Fitness:		1.000000
 	generations/trial:	57.1
 
 Average for all organisms evaluated during experiment
 	Complexity:		31.820000
-	Fitness:			0.577561
+	Fitness:		0.577561
 
 Efficiency score:		0.463375
 
@@ -523,10 +523,10 @@ Champion found in 87 trial run
 	Winner Genes:		7
 	Winner Evals:		6607
 
-	Diversity:			679
+	Diversity:		679
 	Complexity:		15
-	Age:				2
-	Fitness:			1.000000
+	Age:			2
+	Fitness:		1.000000
 
 Average among winners
 	Winner Nodes:		18.2
@@ -534,16 +534,16 @@ Average among winners
 	Winner Evals:		37749.9
 	Generations/trial:	38.2
 
-	Diversity:			639.566667
+	Diversity:		639.566667
 	Complexity:		57.933333
-	Age:				2.811111
-	Fitness:			1.000000
+	Age:			2.811111
+	Fitness:		1.000000
 
 Averages for all organisms evaluated during experiment
-	Diversity:			669.277647
+	Diversity:		669.277647
 	Complexity:		38.990155
-	Age:				2.817825
-	Fitness:			0.010878
+	Age:			2.817825
+	Fitness:		0.010878
 
 Efficiency score:		6.499683
 ```
