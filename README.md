@@ -406,6 +406,170 @@ The NEAT-Python and MultiNEAT libraries obtained similar efficiency scores and w
 
 The goNEAT library received the highest efficiency score value mostly due to its outstanding execution speed, which is almost 70x times faster than of NEAT-Python library.
 
+# The Double Pole-Balancing Problem Benchmark
+
+The single-pole balancing problem is easy enough for the NEAT algorithm, which can quickly find the optimal control strategy to maintain a stable system state. To make the experiment more challenging, we present a more advanced version of the cart-pole balancing problem. In this version, the two poles are connected to the moving cart by a hinge. A schema of the new cart-poles apparatus is shown in the following image:
+
+![Double Pole-Balancing Scheme][double_pole-balancing_scheme]
+
+The goal of the controller is to apply the force to the cart keeping two poles balanced as long as possible. At the same time, the cart should stay on track within the defined boundaries. As with single-pole balancing problem discussed before the control strategy can be defined as an avoidance control problem. Which means that the controller must maintain stable system state avoiding the danger zones when cart moves outside the track boundaries or either of the poles fall out of allowed vertical angle. There is no unique solution for this problem, but an appropriate control strategy can be found because the poles have different lengths and mass. Therefore they respond differently to the control inputs.
+
+The goal of the pole-balancing problem is to stabilize an inherently unstable
+system and keep it balanced as long as possible but at least the expected number of time steps as specified in the experiment configuration (100 000). Thus, the objective function must optimize the duration of stable pole-balancing and can be defined as the logarithmic difference between the expected number of steps and the actual number of steps that obtained during the evaluation of the phenotype ANN. The loss function is given as follows:
+```
+loss = (log(t_max) - log(t_eval)) / log(t_max)
+```
+Where t_max is an expected number of time steps from the configuration of the experiment, and t_eval is the actual number of time steps during which the controller was able to maintain a stable state of the pole-balancer within bounds. Please note that loss value is in range [0.0, 1.0]
+
+And the fitness score is:
+```
+fitness = 1.0 - loss
+```
+
+The evaluation is done in 100 experiment trials over a maximum of 100 epochs (generations) of evolution each. The fitness threshold for the successful solver is 1.0, which is also the maximal possible fitness value with a given fitness function. This experiment will use increased population size of the genomes compared to the previous experiments. We will experiment with population of 1000 genomes during the evolution.
+
+### The NEAT-Python Library Results
+
+In the Double Pole-Balancing experiment, the NEAT-Python library gets the efficiency score better than of MultiNEAT Python Library, but significantly lower than of goNEAT library.
+
+The Double Pole-Balancing experiment with NEAT-Python library can be started with the following commands:
+```bash
+$ conda activate neat
+$ cd src
+$ python two_pole_experiment_neat.py -t 100
+```
+
+The output of the command above is similar to the following:
+```txt
+Solved 37 trials from 100, success rate: 0.370000
+Average
+	trial duration:		223304.507408 ms
+	epoch duration:		2648.731512 ms
+	generations/trial:	82.3
+
+Average among winners
+	Complexity:		12.081081
+	Fitness:			1.000000
+	generations/trial:	52.2
+
+Average for all organisms evaluated during experiment
+	Complexity:		12.300000
+	Fitness:			0.805440
+
+Efficiency score:		2.502670
+
+Experiment's elapsed time:	22330.452 sec
+```
+
+The success rate of the NEAT-Python library with this experiment dropped significantly, and execution time increased dramatically due to an increase in the duration of one trial. The increase in the duration of the trial was caused by low success rate (most trials executed about 100 generations), and also because the solutions were found mainly in later generations of evolution (on average after 52 generations), and both of these factors led to the average number of generations executed per trial up to about 82.
+
+### The MultiNEAT Library Results
+
+In the Double Pole-Balancing experiment, the MultiNEAT Python library gets the worst efficiency score among all tested libraries.
+
+The Double Pole-Balancing experiment with MultiNEAT library can be executed as follows:
+```bash
+$ conda activate neat
+$ cd src
+$ python two_pole_experiment_multineat.py -t 100
+```
+
+The command above will be produce output similar to the following:
+```txt
+Solved 8 trials from 100, success rate: 0.080000
+Average
+	trial duration:		1080223.639586 ms
+	epoch duration:		10968.178278 ms
+	generations/trial:	95.7
+
+Average among winners
+	Complexity:		30.000000
+	Fitness:			1.000000
+	generations/trial:	57.1
+
+Average for all organisms evaluated during experiment
+	Complexity:		31.820000
+	Fitness:			0.577561
+
+Efficiency score:		0.463375
+
+Experiment's elapsed time:	108022.365 sec
+```
+
+The MultiNEAT Python library demonstrates the worst performance among all the libraries tested in this experiment. It showed the lowest success rate (8 successful trials per 100) with a duration of one epoch almost 5 times higher than the NEAT-Python library, and 25 times higher than the goNEAT library. Such, a profound drop in execution speed may be caused by the increase in population size used during this experiment. The MultiNEAT Python library seems to handle substantial sizes of genomes populations very poorly.
+
+### The goNEAT Library Results
+
+In Double Pole-Balancing experiment, the goNEAT obtains the higher efficiency score value due to its outstanding execution speed compared to its Python counterparts.
+
+For the instruction of how to install and use a library, please refer to the [goNEAT][6] GitHub repository.
+
+After the GO language environment is ready and the library is installed, you can run a  Single Pole-Balancing experiment with the following command:
+
+```bash
+cd $GOPATH/src/github.com/yaricom/goNEAT
+go run executor.go -out ./out/pole1 -context ./data/pole1_150.neat -genome ./data/pole1startgenes -experiment cart_pole
+```
+The command will produce the output similar to the following:
+```txt
+Solved 90 trials from 100, success rate: 0.900000
+Average
+	Trial duration:		35.435151438s
+	Epoch duration:		401.225213ms
+	Generations/trial:	44.4
+
+Champion found in 87 trial run
+	Winner Nodes:		8
+	Winner Genes:		7
+	Winner Evals:		6607
+
+	Diversity:			679
+	Complexity:		15
+	Age:				2
+	Fitness:			1.000000
+
+Average among winners
+	Winner Nodes:		18.2
+	Winner Genes:		39.9
+	Winner Evals:		37749.9
+	Generations/trial:	38.2
+
+	Diversity:			639.566667
+	Complexity:		57.933333
+	Age:				2.811111
+	Fitness:			1.000000
+
+Averages for all organisms evaluated during experiment
+	Diversity:			669.277647
+	Complexity:		38.990155
+	Age:				2.817825
+	Fitness:			0.010878
+
+Efficiency score:		6.499683
+```
+
+The goNEAT library demonstrate the best efficiency score among all tested libraries due to highest success rate (90 successful trials per 100) and outstanding execution speed. Also this library is able to find successful double pole-balancing controllers at the earlier stages of the evolutionary process, which resulted in lowest average number of generations executed per trial (about 44). That number is almost two times lower than corresponding value for the NEAT-Python library. All of this resulted in lowest average trial duration.
+
+## The Double Pole-Balancing Problem Results
+
+Further, we present the results of the evaluation of the different NEAT libraries in the task of finding successful Double Pole-Balancer controllers.
+
+| Library | Efficiency Score | Success Rate | Avg Solution Fitness | Avg Epoch Duration | Avg Solution Complexity | Avg Generations per Trial | Platform |
+| --- |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| goNEAT | 6.50 | 0.9 | 1.0  | 401.23 | 57.93 | 44.4 | GO |
+| NEAT-Python | 2.50 | 0.37 | 1.0  | 2648.73 | 12.08 | 82.3 | C++, Python |
+| MultiNEAT Python | 0.46 | 0.08 | 1.0  | 10968.18 | 30 | 95.7 | Python |
+
+In the results table, the libraries are ordered in descending order based on their efficiency score value. Thus, at the top row placed the most efficient library, and at the bottom row is the least efficient one.
+
+### The Double Pole-Balancing Problem Conclusion
+
+This experiment was dealing with significantly more hard-to-solve problems than considered earlier. To increase the chance of finding a solution within a limited number of evolution epochs, we increased the size of genomes population to expand the solution search space. As an additional benefit, we were able to test how each library handles the significant population sizes during the evolutionary process. Such amendment paid off, and as a result, we have found that MultiNEAT Python library is very bad in handling large populations of genomes. As a result, the MultiNEAT Python library obtained the lowest efficiency score due to the lowest success rate and extremely slow execution speed.
+
+The NEAT-Python library in this experiment gained second place with an efficiency score almost 5 times higher than the MultiNEAT Python library. Such achievement can be explained by its higher success rate and the lower value of the average epoch duration compared to the MultiNEAT Python library. Also, the NEAT-Python library was able to find less complex solutions among all libraries. The low complexity of solutions caused by internal representation of bias nodes used in NEAT-Python library, which is part of standard nodes activation function rather than separate nodes as in other tested libraries.
+
+The goNEAT library, as with previous experiments, demonstrated the best efficiency score due to the highest success rate (90%), fastest execution speed and ability to find solutions in the early stages of evolution.
+
 # Credits
 The source code is maintained and managed by [Iaroslav Omelianenko][3]
 
@@ -417,3 +581,4 @@ The source code is maintained and managed by [Iaroslav Omelianenko][3]
 [6]:https://github.com/yaricom/goNEAT
 
 [single_pole-balancing_scheme]: https://github.com/yaricom/goNEAT/blob/master/contents/single_pole-balancing.jpg "The single pole-balancing experimental setup"
+[double_pole-balancing_scheme]: https://github.com/yaricom/goNEAT/blob/master/contents/double_pole-balancing.png "The double pole-balancing experimental setup"
